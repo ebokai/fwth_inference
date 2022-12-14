@@ -6,7 +6,7 @@ vector<double> load_data(string fname, unsigned long &N){
 
 	string line, subline;
 	uint32_t state;
-	string input_path = "../data/set_02/" + fname + ".dat";
+	string input_path = "../data/" + fname + ".dat";
 	ifstream input_file(input_path);
 	vector<double> pdata(OMEGA);
 
@@ -32,7 +32,7 @@ void write_parameters(vector<double> parameters, vector<uint64_t> model, string 
 	uint64_t op;
 	double par;
 
-	string output_path = "../data/set_02_jij_new/" + fname + "_jij.dat";
+	string output_path = "../pars/" + fname + "_jij.dat";
 	ofstream output_file(output_path);
 
 	// skip identity operator 
