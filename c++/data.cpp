@@ -6,7 +6,8 @@ vector<double> load_data(string fname, unsigned long &N){
 
 	string line, subline;
 	uint32_t state;
-	ifstream input_file(fname);
+	string input_path = "../data/set_02/" + fname + ".dat";
+	ifstream input_file(input_path);
 	vector<double> pdata(OMEGA);
 
 	while(getline(input_file, line)){
@@ -24,4 +25,24 @@ vector<double> load_data(string fname, unsigned long &N){
 	}
 
 	return pdata;
+}
+
+void write_parameters(vector<double> parameters, vector<uint64_t> model, string fname){
+
+	uint64_t op;
+	double par;
+
+	string output_path = "../data/set_02_jij_new/" + fname + "_jij.dat";
+	ofstream output_file(output_path);
+
+	// skip identity operator 
+	for(unsigned int i = 1; i < model.size(); i++){
+		op = model[i];
+		par = parameters[op];
+		//cout << op << " " << par << endl;
+		output_file << bitset<n>(op) << "\t" << par << endl;
+	}
+
+	output_file.close();
+
 }

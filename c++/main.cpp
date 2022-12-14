@@ -16,32 +16,23 @@ int main(int argc, char **argv){
 	vector<uint64_t> model;
 	model.push_back(0);
 
+	// pairwise model 
+	for(int i = 0; i < n; i++){
+		for(int j = i + 1; j < n; j++){
+			uint64_t op = (ONE << i) + (ONE << j);
+			model.push_back(op);
+		}
+	}
+
 	vector<double> obs_model = model_observables(parameters);
 
-	uint64_t mbo = most_biased_op(obs_data, obs_model);
-	model.push_back(mbo);
-
 	auto start = chrono::system_clock::now();
-	for (int i = 0; i < 50; i++){
-		parameters = gradient_descent(parameters, obs_model, obs_data, model);
-		obs_model = model_observables(parameters);
-		mbo = most_biased_op(obs_data, obs_model);
-		model.push_back(mbo);
-	}
+	parameters = gradient_descent(parameters, obs_model, obs_data, model);
 	auto end = chrono::system_clock::now();
 	chrono::duration<double> elapsed = end - start;
-	cout << elapsed.count() << endl;
+	cout << elapsed.count() << " seconds." << endl;
 
-	
-
-
-
-
-
-
-
-
-
+	write_parameters(parameters,  model, fname);
 
 	return 0;
 	

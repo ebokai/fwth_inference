@@ -19,6 +19,7 @@ const double EPSILON = 1e-12; // squared tolerance
 vector<double> load_data(string fname, unsigned long &N);
 vector<double> fwth(vector<double> v);
 vector<double> model_observables(vector<double> parameters);
+void write_parameters(vector<double> parameters, vector<uint64_t> model, string fname);
 
 // use a struct for these arguments
 vector<double> gradient_descent(vector<double> parameters, vector<double> obs_model, vector<double> obs_data, vector<uint64_t> model);
